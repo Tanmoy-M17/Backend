@@ -5,6 +5,12 @@ var jwt = require("jsonwebtoken");
 const { verifyRole, verifyToken } = require("../Middlewares/verifytoken");
 const { Registermodel } = require("../models/register.model");
 const userrouter = express.Router();
+
+userrouter.get("/", async (req, res) => {
+  const users=await Registermodel.find()
+  res.send({user:users})
+});
+
 //-----------------Register A user -----------------
 userrouter.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
