@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 
-const connection=mongoose.connect("mongodb://127.0.0.1:27017/agumentic");
+const connection=mongoose.connect("mongodb+srv://tanmoy:tanmoy@cluster0.cmjb5.mongodb.net/agumentic?retryWrites=true&w=majority")
+
 
 module.exports={
     connection
