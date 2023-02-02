@@ -5,7 +5,7 @@
   "main": "./App/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./App/src/index.js"
+    "start": "nodemon ./App/src/index.js"
   },
   "keywords": [],
   "author": "",
