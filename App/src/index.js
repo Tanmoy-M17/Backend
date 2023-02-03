@@ -1,10 +1,12 @@
 const express=require("express")
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const {connection}=require("../config/db")
 const {userrouter}=require("../routes/user.route");
 const { imagerouter } = require("../routes/image.route");
 const { datarouter } = require("../routes/data.route");
 const app=express();
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
 app.use("/user",userrouter)
