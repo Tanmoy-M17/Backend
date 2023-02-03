@@ -11,6 +11,7 @@ userrouter.get("/", async (req, res) => {
   res.send({user:users})
 });
 
+
 //-----------------Register A user -----------------
 userrouter.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
@@ -36,7 +37,6 @@ userrouter.post("/register", async (req, res) => {
 });
 //--------------Login A user-------------------
 userrouter.post("/login", async (req, res) => {
-  console.log("login");
   const { email, password } = req.body;
   try {
     const user = await Registermodel.find({ email });
@@ -52,16 +52,17 @@ userrouter.post("/login", async (req, res) => {
             res.cookie("auth", token).json({
               isAuth: true,
               role: user[0].role,
+              id:user[0]._id,
               token: token,
               message: "Login SuccesFully",
             });
           }
         } else {
-          res.send({message:"Email or Password is Wrong"});
+          res.status(404).send({message:"Email or Password is Wrong"});
         }
       });
     } else {
-      res.send({message:"Plaese Register First"});
+      res.status(404).send({message:"Plaese Register First"});
     }
   } catch (err) {
     res.send({message:err});
@@ -80,7 +81,7 @@ userrouter.post("/addadmin", verifyRole, async (req, res) => {
     else{
        bcrypt.hash(password, 5, async (err, hash) => {
       if (err) {
-        console.log("has",err);
+        console.log(err);
       } else {
         const user = new Registermodel({ email, password: hash, name, role });
         await user.save();
@@ -105,6 +106,8 @@ userrouter.get("/logout", verifyToken, async (req, res) => {
     }
   });
 });
+
+
 
 module.exports = {
   userrouter,

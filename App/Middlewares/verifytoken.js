@@ -14,23 +14,22 @@ const verifyRole = async(req, res, next) => {
           next();
         }
         else{
-          res.send({message:"You Are not authorised"})
+          res.status(404).send({message:"You Are not authorised"})
         }
       }else{
-        res.send({message:"Please Sign up"})
+        res.status(404).send({message:"Please Sign up"})
       }
     } else {
-      res.send({message:"Please Login First"});
+      res.status(404).send({message:"Please Login First"});
     }
   } else {
-    res.send({message:"Please Login First"});
+    res.status(404).send({message:"Please Login First"});
   }
 };
 
 
 const verifyToken = (req, res, next) => {
   const token = req.headers.auth;
-  console.log(token)
   if (token) {
     const decoded = jwt.verify(token, "masai");
     if (decoded) {
