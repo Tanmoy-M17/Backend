@@ -31,7 +31,7 @@ imagerouter.patch("/updateimage/:id",verifyRole, async (req, res) => {
   imagerouter.get("/", async (req, res) => {
     try{
        const data=await ImageModel.find()
-        res.send({data:data})
+        res.send(data)
     }catch(err){
         res.status(404).send({message:err})
     }
